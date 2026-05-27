@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Демо: лонгрид</title>
+  <link rel="stylesheet" href="../shared/styles/longread.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #faf6ef;
+    }
+    .lr-root {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .lr-icon {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="longread"></div>
+
+  <script type="module">
+    import { renderLongread } from '../shared/scripts/LongreadBlock.js';
+
+    fetch('./scenes/demo-longread.json')
+      .then(r => r.json())
+      .then(scene => {
+        const container = document.getElementById('longread');
+        renderLongread(scene, container);
+      })
+      .catch(err => {
+        console.error('Не удалось загрузить сцену:', err);
+        document.getElementById('longread').innerHTML =
+          '<p style="color:red">Ошибка загрузки. Открой через локальный сервер (не через file://).</p>';
+      });
+  </script>
+</body>
+</html>
